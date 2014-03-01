@@ -5,6 +5,12 @@ Command-line utility for downloading folders of MP3 files, from a simple web dir
 
 Because OS X's Samba support is awfully slow and FTP is a joke.
 
+Installation
+------------
+
+	> cd path/to/itunesimport
+	> bundle install
+
 Example usage
 -------------
 
