@@ -1,0 +1,16 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    httpclient (2.3.4.1)
+    mini_portile (0.5.2)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
+    ruby-progressbar (1.4.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  httpclient
+  nokogiri
+  ruby-progressbar
