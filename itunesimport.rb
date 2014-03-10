@@ -11,6 +11,9 @@ require 'httpclient'
 require 'ruby-progressbar'
 require 'fileutils'
 require 'addressable/uri'
+require 'tmpdir'
+
+WORKING_DIR = "#{Dir.tmpdir}/itunesimport"
 
 def friendly_filename(filename)
     filename = Addressable::URI.unescape filename
@@ -56,8 +59,8 @@ if nodes.length == 0 then
 end
 
 # Clear temp folder
-FileUtils.rm_rf('/tmp/itunesimport')
-FileUtils.mkdir('/tmp/itunesimport')
+FileUtils.rm_rf(WORKING_DIR)
+FileUtils.mkdir(WORKING_DIR)
 
 # Counter used to inform user of current item
 i = 0
@@ -65,7 +68,7 @@ i = 0
 # Iterates over URIs for the `href` attribute in our nodelist
 for item_uri in nodes.collect{|n| Addressable::URI.join(base_uri, n['href'])}
   # Open file for writing
-  f = File.open('/tmp/itunesimport/' + friendly_filename(nodes[i]['href']), 'w')
+  f = File.open("#{WORKING_DIR}/#{friendly_filename(nodes[i]['href'])}", 'w')
   
   # Get HTTP head request for information on file
   head = http.head(item_uri)
@@ -106,4 +109,4 @@ end
 puts "Opening in iTunes..."
 
 # Run the shell command to open files in iTunes
-`open -a iTunes #{nodes.collect{|n| '/tmp/itunesimport/' + friendly_filename(n['href'])}.join(' ')}`
+`open -a iTunes #{nodes.collect{|n| WORKING_DIR + '/' + friendly_filename(n['href'])}.join(' ')}`
