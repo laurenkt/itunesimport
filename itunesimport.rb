@@ -1,4 +1,4 @@
-#!/Users/lauren/.rbenv/versions/2.0.0-p247/bin/ruby
+#!/usr/bin/env ruby
 
 # Bundler
 require 'rubygems'
